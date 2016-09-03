@@ -16,13 +16,15 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     User findByLogin(String login);
 
+    List<User> findByUserRole(String role);
+
+    List<User> findAllBySchools(School school);
+
+    List<User> findByFirstNameStartingWithIgnoreCase(String firstName);
+
     @Query("select userRole from User u where u.login = :login")
     String getUserRoleByLogin(@Param("login") String login);
 
     @Query("select userId from User u where u.login = :login")
     int getUserIdByLogin(@Param("login") String login);
-
-    List<User> findByUserRole(String role);
-
-    List<User> findAllBySchools(School school);
 }

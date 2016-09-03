@@ -43,6 +43,10 @@ public class UserService {
         return userRepository.findAllBySchools(school);
     }
 
+    public List<User> findByFirstName(String name){
+        return userRepository.findByFirstNameStartingWithIgnoreCase(name);
+    }
+
     @Transactional
     public User addNew(User user) {
         return userRepository.saveAndFlush(user);

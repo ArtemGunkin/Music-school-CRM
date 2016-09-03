@@ -3,7 +3,14 @@
     <div class="panel panel-default">
         <div class="panel-body">
         <#if users? has_content>
-            <h2 class="sub-header">Users table</h2>
+            <h2 class="sub-header">
+                Users table
+                <div class="pull-right">
+                    <div class="input-group">
+                        <input id="search" type="text" class="form-control" placeholder="Search">
+                    </div>
+                </div>
+            </h2>
             <hr>
             <div class="table-responsive">
                 <table class="table table-striped">
@@ -40,6 +47,7 @@
         </#if>
         </div>
     </div>
-<#include "../templates/footer.ftl">
+    <#include "../templates/footer.ftl">
+    <script src="../../assets/js/usersearch.js"></script>
 </div>
 

@@ -1,22 +1,22 @@
 package ru.kpfu.itis.gunkin.controllers;
 
+import org.codehaus.jackson.map.annotate.JsonView;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import ru.kpfu.itis.gunkin.entities.News;
 import ru.kpfu.itis.gunkin.entities.School;
 import ru.kpfu.itis.gunkin.entities.User;
 import ru.kpfu.itis.gunkin.entities.Worker;
+import ru.kpfu.itis.gunkin.json.Views;
 import ru.kpfu.itis.gunkin.services.NewsService;
 import ru.kpfu.itis.gunkin.services.SchoolService;
 import ru.kpfu.itis.gunkin.services.WorkerService;
 import ru.kpfu.itis.gunkin.services.impl.UserService;
 
 import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -84,5 +84,12 @@ public class ApiController {
         schoolService.updateSchool(school);
         List<School> schools = schoolService.getUserSchools(user);
         return new ResponseEntity<List<School>>(schools, HttpStatus.OK);
+    }
+
+    @JsonView(Views.Public.class)
+    @RequestMapping(value = "/users/search")
+    public ResponseEntity<List<User>> getUsers(@RequestBody String query) {
+        ArrayList<User> users = (ArrayList<User>) userService.findByFirstName(query);
+        return new ResponseEntity<List<User>>(users, HttpStatus.OK);
     }
 }
