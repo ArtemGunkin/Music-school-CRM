@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "schools", schema = "public", catalog = "theatre")
+@Table(name = "schools", schema = "public", catalog = "music_school")
 public class School {
     private int id;
     private int cost;

@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "news", schema = "public", catalog = "theatre")
+@Table(name = "news", schema = "public", catalog = "music_school")
 public class News {
     private long id;
     private String title;

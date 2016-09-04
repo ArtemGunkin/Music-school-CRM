@@ -3,13 +3,15 @@ package ru.kpfu.itis.gunkin.entities;
 import org.codehaus.jackson.annotate.JsonBackReference;
 import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.map.annotate.JacksonInject;
+import org.codehaus.jackson.map.annotate.JsonView;
+import ru.kpfu.itis.gunkin.json.Views;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users", schema = "public", catalog = "theatre")
+@Table(name = "users", schema = "public", catalog = "music_school")
 public class User {
     private int userId;
     private Integer phone;
