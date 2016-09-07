@@ -10,7 +10,7 @@ Simple CRM on Java with Spring
 - Hibernate
 - Freemarker (view)
 - PDF generator
-- Bootsrap 3
+- Bootstrap 3
 
 ***
-Desctop client on JavaFX for this CRM you can see [here](https://github.com/ArtemGunkin/Music-school-client).
+Desktop client on JavaFX for this CRM you can see [here](https://github.com/ArtemGunkin/Music-school-client).
