@@ -9,6 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import ru.kpfu.itis.gunkin.entities.School;
 import ru.kpfu.itis.gunkin.services.SchoolService;
+import util.SchoolUtil;
 
 import java.util.ArrayList;
 
@@ -22,19 +23,35 @@ public class SchoolServiceTest {
     private ArrayList<School> schools;
 
     @Before
-    public void createSchools(){
-        schools  = new ArrayList<School>();
-        School guitarSchool = new School(1, 550, "Guitar school", "Some info about piano school");
-        School pianoSchool = new School(2, 700, "Piano school", "Some info about piano school");
-        schools.add(guitarSchool);
-        schools.add(pianoSchool);
+    public void createSchools() {
+        schools = SchoolUtil.createSchools();
+        for (School school : schools)
+            schoolService.createSchool(school);
     }
 
     @Test
-    public void serviceShouldReturnSchools(){
-        for (School school : schools)
-            schoolService.createSchool(school);
-
+    public void serviceShouldReturnSchools() {
         Assert.assertEquals(schools, schoolService.getSchools());
+    }
+
+    @Test
+    public void serviceShouldReturnActiveSchools() {
+        Assert.assertEquals(SchoolUtil.returnActive(schools), schoolService.getActiveSchools());
+    }
+
+    @Test
+    public void serviceShouldDisableSchool() {
+        for (School school : SchoolUtil.returnActive(schools))
+            schoolService.disableSchoolById(school.getId());
+
+        Assert.assertEquals(0, schoolService.getActiveSchools().size());
+    }
+
+    @Test
+    public void serviceShouldEnableSchool() {
+        for (School school : schoolService.getSchools())
+            schoolService.enableSchoolById(school.getId());
+
+        Assert.assertEquals(schoolService.getSchools(), schoolService.getActiveSchools());
     }
 }
