@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "users", schema = "public", catalog = "music_school")
+@Table(name = "users", schema = "public")
 public class User {
     private int userId;
     private Integer phone;
@@ -157,21 +157,7 @@ public class User {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        User user = (User) o;
-
-        if (userId != user.userId) return false;
-        if (login != null ? !login.equals(user.login) : user.login != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (userRole != null ? !userRole.equals(user.userRole) : user.userRole != null) return false;
-        if (firstName != null ? !firstName.equals(user.firstName) : user.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(user.lastName) : user.lastName != null) return false;
-        if (phone != user.phone) return false;
-        if (profileImage != null ? !profileImage.equals(user.profileImage) : user.profileImage != null) return false;
-        if (info != null ? !info.equals(user.info) : user.info != null) return false;
-        return  !(comments != null ? !comments.equals(user.comments) : user.comments != null);
+        return login.equals(((User) o).getLogin());
     }
 
     @Override

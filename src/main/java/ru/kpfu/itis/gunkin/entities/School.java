@@ -1,6 +1,5 @@
 package ru.kpfu.itis.gunkin.entities;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 
 import javax.persistence.*;
@@ -8,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "schools", schema = "public", catalog = "music_school")
+@Table(name = "schools", schema = "public")
 public class School {
     private int id;
     private int cost;
@@ -26,6 +25,11 @@ public class School {
         this.cost = cost;
         this.name = name;
         this.info = info;
+    }
+
+    public School(int id, int cost, String name, String info, Worker worker) {
+        this(id, cost, name, info);
+        this.worker = worker;
     }
 
     @Id
@@ -118,7 +122,7 @@ public class School {
         long result = id;
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (info != null ? info.hashCode() : 0);
-        return (int)result;
+        return (int) result;
     }
 
     @Override

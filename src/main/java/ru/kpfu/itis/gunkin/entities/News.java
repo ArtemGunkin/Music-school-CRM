@@ -1,6 +1,7 @@
 package ru.kpfu.itis.gunkin.entities;
 
 import org.codehaus.jackson.annotate.JsonBackReference;
+import org.codehaus.jackson.annotate.JsonIgnore;
 import org.codehaus.jackson.annotate.JsonManagedReference;
 import org.codehaus.jackson.map.annotate.JacksonInject;
 
@@ -10,7 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "news", schema = "public", catalog = "music_school")
+@Table(name = "news", schema = "public")
 public class News {
     private long id;
     private String title;
@@ -53,7 +54,8 @@ public class News {
         return pubDate;
     }
 
-    @OneToMany(targetEntity = Comment.class, mappedBy = "news")
+
+    @OneToMany(fetch = FetchType.EAGER, targetEntity = Comment.class, cascade =  CascadeType.ALL, mappedBy = "news")
     @JsonBackReference
     public List<Comment> getComments() {
         return comments;
@@ -88,17 +90,7 @@ public class News {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        News that = (News) o;
-
-        if (id != that.id) return false;
-        if (title != null ? !title.equals(that.title) : that.title != null) return false;
-        if (content != null ? !content.equals(that.content) : that.content != null) return false;
-        if (pubDate != null ? !pubDate.equals(that.pubDate) : that.pubDate != null) return false;
-
-        return true;
+        return id == ((News) o).getId();
     }
 
     @Override

@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @Entity
-@Table(name = "comments", schema = "public", catalog = "music_school")
+@Table(name = "comments", schema = "public")
 public class Comment {
     private int id;
     private Date date;

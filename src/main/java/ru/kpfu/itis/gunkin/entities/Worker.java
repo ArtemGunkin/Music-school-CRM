@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "workers", schema = "public", catalog = "music_school")
+@Table(name = "workers", schema = "public")
 public class Worker {
     private int id;
     private String firstName;
@@ -20,11 +20,25 @@ public class Worker {
     }
 
     public Worker(String firstName, String lastName, String info, String jobTitle, List<School> schools) {
+        this(firstName, lastName, info, jobTitle);
+        this.schools = schools;
+    }
+
+    public Worker(String firstName, String lastName, String info, String jobTitle, School school) {
+        this(firstName, lastName, info, jobTitle);
+        schools.add(school);
+    }
+
+    public Worker(String firstName, String lastName, String info, String jobTitle) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobTitle = jobTitle;
-        this.schools = schools;
         this.info = info;
+    }
+
+    public Worker(int id, String firstName, String lastName, String info, String jobTitle) {
+        this(firstName, lastName, info, jobTitle);
+        this.id = id;
     }
 
     @Id
@@ -60,7 +74,7 @@ public class Worker {
     }
 
 
-    public String fullName(){
+    public String fullName() {
         return firstName + " " + lastName;
     }
 
@@ -95,5 +109,10 @@ public class Worker {
     @Override
     public String toString() {
         return firstName + " " + lastName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        return id == ((Worker) obj).getId();
     }
 }
