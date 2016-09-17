@@ -53,7 +53,7 @@ public class UserController {
         oldUser.setPhone(user.getPhone());
 
         userService.addNew(oldUser);
-        return "redirect:/admin/users";
+        return "redirect:/user";
     }
 
 }
